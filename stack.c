@@ -75,7 +75,7 @@ void	ft_stack_del_last(t_stack *s)
 	s->len -= 1;
 }
 
-void	*ft_stack(t_stack s)
+void	*ft_stack_get_ptr(t_stack s)
 {
 	return ((s.data + s.prefix));
 }
