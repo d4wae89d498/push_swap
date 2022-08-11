@@ -1,81 +1,80 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   stack.c                                            :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/17 17:16:35 by mafaussu          #+#    #+#             */
-/*   Updated: 2022/05/17 17:50:27 by mafaussu         ###   ########lyon.fr   */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "stack.h"
 
-t_stack ft_stack_new(unsigned int size)
+t_stack	stack_init(void *data)
 {
-	return ((t_stack)	{0, 0, malloc(size * sizeof(void *))});
+	t_stack	s;
+
+	s.size = 0;
+	s.data = data;
+	return (s);
 }
 
-void	ft_stack_swap(t_stack *s, int x, int y)
+void	stack_push(t_stack *s, int i)
 {
-	void	*f;
-
-	f = s->data[s->prefix + x];
-	s->data[s->prefix + x] = s->data[s->prefix + y];
-	s->data[s->prefix + y] = f;
+	s->data[s->size] = i;
+	s->size += 1;
 }
 
-void	ft_stack_push(t_stack *s, void *data)
+void	stack_pull(t_stack *s)
 {
-	s->data[s->prefix + (s->len)++] = data;
+	s->size -= 1;
 }
 
-void	ft_stack_rotate_right(t_stack *s)
+void	stack_swap(t_stack s)
 {
-	int		i;
-	void	*swp;
+	int	swp;
 
-	if (s->len < 2)
+	swp = s.data[s.size - 1];
+	s.data[s.size - 1] = s.data[s.size - 2];
+	s.data[s.size - 2] = swp;
+}
+
+void	stack_rotate(t_stack s)
+{
+	int	i;
+	int	last;
+
+	if (s.size < 2)
 		return ;
-	swp = s->data[s->prefix + s->len - 1];
-	i = s->len - 1;
+
+	last = s.data[s.size - 1];
+	i = s.size - 1;
 	while (i)
 	{
-		s->data[s->prefix + i] = s->data[s->prefix + i - 1]; 
+		s.data[i] = s.data[i - 1];
 		i -= 1;
 	}
-	s->data[s->prefix] = swp;
+	s.data[0] = last;
 }
 
-void	ft_stack_rotate_left(t_stack *s)
+void	stack_reverse_rotate(t_stack s)
 {
-	int		i;
-	void	*swp;
+	int	i;
+	int	first;
 
-	if (s->len < 2)
+	if (s.size < 2)
 		return ;
-	swp = s->data[s->prefix];
+
+	first = s.data[0];
 	i = 0;
-	while (i < s->len - 1)
+	while (i < s.size - 1)
 	{
-		s->data[s->prefix + i] = s->data[s->prefix + i + 1];
+		s.data[i] = s.data[i + 1];
 		i += 1;
 	}
-	s->data[s->prefix + s->len - 1] = swp;
+	s.data[s.size - 1] = first;
 }
 
-void	ft_stack_del_first(t_stack *s)
+#include <stdio.h>
+void	stack_dump(t_stack s)
 {
-	s->prefix += 1;
-}
+	int	i;
 
-void	ft_stack_del_last(t_stack *s)
-{
-	s->len -= 1;
-}
-
-void	*ft_stack_get_ptr(t_stack s)
-{
-	return ((s.data + s.prefix));
+	i = s.size;
+	while (i)
+	{
+		i -= 1;
+		printf("[%i] %i\n", i, s.data[i]);
+	}
+	printf("-\n");
 }

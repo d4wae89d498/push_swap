@@ -1,27 +1,36 @@
-#include "stack.h"
+#include "solver.h"
 
-#include <stdio.h>
-
-char	**ft_stack_str(t_stack s)
-{
-	return ((char**)ft_stack(s));
-}
 
 int main(int ac, char **av)
 {
+	compile(ac, av);
+	/*
+	static int	mem_a[ARG_MAX];
 	t_stack		a;
+	static int	mem_b[ARG_MAX];
+	t_stack		b;
 
-	int			i;
+	a = stack_init(mem_a);
+	stack_push(&a, 42);
+	stack_push(&a, 0);
+	stack_push(&a, -21);
+	stack_push(&a, 21);
+	stack_push(&a, 1);
+	stack_push(&a, 2);
+	stack_dump(a);
+	stack_swap(a);
+//	stack_pull(&a);
+//	stack_pull(&a);
+	stack_dump(a);
 
-	a = ft_stack_new(ac);
+	b = stack_init(mem_b);
+	stack_push(&b, 75);
+	stack_push(&b, 2);
+	stack_push(&b, 45);
+	stack_push(&b, -1);
 	
-	i = 1;
-	while (i < ac)
-		ft_stack_push(&a, av[i++]);
 
-	ft_stack_rotate_right(&a);
-
-	i = 0;
-	while (i < a.len)
-		printf("-%s\n", ft_stack_str(a)[i++]);
+	dd(&a, &b);
+	rb(&a, &b);
+	dd(&a, &b);*/
 }
