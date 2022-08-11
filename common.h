@@ -1,7 +1,7 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 # include "stack.h"
-
+# include "stdio.h"
 /* common1.c */
 void	sa(t_stack *a, t_stack *b);
 void	sb(t_stack *a, t_stack *b);

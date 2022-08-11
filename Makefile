@@ -1,3 +1,6 @@
 all:
-	cc *.c && ./a.out 5 6 -8 9 7 8
-
+	cc *.c
+clean:
+	rm -rf *.dSYM
+fclean:	clean
+	rm -rf a.out

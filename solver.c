@@ -27,91 +27,80 @@ static int ft_atoi(char *s)
 	}
 	return (o * sign);
 }
-/*
-static void	solve(t_stack *a, t_stack *b)
+
+int	find_index(t_stack s, int n)
 {
 	int	i;
 
-	i = a->size - 1;
-	while (i)
-	{
-		if (b->size && b->data[b->size - 1] <= a->data[i])
-			pb(a, b);
-		else 
-
-		i -= 1;
-	}
-}
-*/
-
-void	do_top(t_stack *a, t_stack *b, int position, void(*instr)(t_stack*, t_stack *))
-{
-	int i;
-
 	i = 0;
-	while (i < position)
+	while (i < s.size)
 	{
-		printf("rrb\n");
-		rrb(a, b);
-		i += 1;
-	}
-	instr(a, b);
-	i = 0;
-	while (i < position)
-	{
-		printf("rb\n");
-		rrb(a, b);
-		i += 1;
-	}
-}
-
-void	do_bottom(t_stack *a, t_stack *b, int position, void(*instr)(t_stack*, t_stack *))
-{
-	int i;
-
-	i = 0;
-	while (i < position)
-	{
-		printf("rb\n");
-		rrb(a, b);
-		i += 1;
-	}
-	instr(a, b);
-	i = 0;
-	while (i < position)
-	{
-		printf("rrb\n");
-		rrb(a, b);
-		i += 1;
-	}
-
-}
-
-void	insert(t_stack *a, t_stack *b)
-{
-	int	value;
-	int	i;
-
-	value = a->data[a->size - 1];
-
-
-	i = 0;
-	while (i < b->size)
-	{
-		if (value >= b->data[i])
+		if (s.data[i] >= n)
 			break ;
 		i += 1;
 	}
+	return i;
+}
 
-	if (i >= b->size / 2)
+void	do_x(t_stack *a, t_stack *b, int n, void(*instr)(t_stack *a, t_stack *b))
+{
+	while (n)
 	{
-		printf("Shall insert at index=%i, near from from top.\n", i);
-		do_top(a, b, i, pb);
+		instr(a, b);
+		n -= 1;
 	}
-	else 
+}
+
+void	pa_at(t_stack *a, t_stack *b, int n)
+{
+	if (!a->size)
 	{
-		printf("Shall insert at index=%i, near from from bottom.\n", i);
+		pa(a, b);
+		return ;
 	}
+	do_x(a, b, n, rra);
+	pa(a, b);
+	do_x(a, b, n + 1, ra);
+}
+
+void	pa_at_rev(t_stack *a, t_stack *b, int n)
+{
+	if (!a->size)
+	{
+		pa(a, b);
+		return ;
+	}
+	n = a->size - n;
+	do_x(a, b, n + 1, ra);
+	pa(a, b);
+	do_x(a, b, n, rra);
+}
+
+void	pb_at(t_stack *a, t_stack *b, int n)
+{
+	if (!b->size)
+	{
+		pb(a, b);
+		return ;
+	}
+	do_x(a, b, n, rrb);
+	pb(a, b);
+	do_x(a, b, n + 1, rb);
+}
+
+
+
+void	pb_at_rev(t_stack *a, t_stack *b, int n)
+{
+	if (!b->size)
+	{
+		pb(a, b);
+		return ;
+	}
+	n = b->size - n;
+	do_x(a, b, n + 1, rb);
+	pb(a, b);
+	do_x(a, b, n, rrb);
 }
 
 void	compile(int ac, char **av)
@@ -134,16 +123,15 @@ void	compile(int ac, char **av)
 		stack_push(&a, ft_atoi(av[i]));
 		i += 1;
 	}
-	stack_push(&b, 15);
-	stack_push(&b, 13);
-	stack_push(&b, 7);
-	stack_push(&b, 0);
+	while (a.size)
+	{
+		pb_at(&a, &b, find_index(b, a.data[a.size - 1]));
+	}
+//	pa_at_rev_test(&a, &b, 0);
+	while (b.size)
+	{
+		pa(&a, &b);
+	}
 
-//	pb(&a, &b);
-
-	dd(&a, &b);
-	insert(&a, &b);
-	dd(&a, &b);
-	//	solve(&a, &b);
 //	dd(&a, &b);
 }
