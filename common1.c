@@ -2,12 +2,14 @@
 
 void	sa(t_stack *a, t_stack *b)
 {
+	(void)b;
 	printf("sa\n");
 	stack_swap(*a);
 }
 
 void	sb(t_stack *a, t_stack *b)
 {
+	(void)a;
 	printf("sb\n");
 	stack_swap(*b);
 }
