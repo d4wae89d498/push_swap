@@ -1,7 +1,11 @@
-SRCS=common1.c common2.c common3.c common4.c stack.c
+SRCS=stack.c list.c parser.c\
+common_instructions/dump.c\
+common_instructions/reverse_rotate.c\
+common_instructions/push.c\
+common_instructions/rotate.c
 OBJS=$(SRCS:.c=.o)
-CFLAGS=-Wall -Werror -Wextra
-DEPS=Makefile common.h solver.h stack.h 
+CFLAGS=-Wall -Werror -Wextra -I.
+DEPS=Makefile common.h solver.h stack.h list.h
 all: solver checker
 %.o: %.c $(DEPS)
 	cc $(CFLAGS) -c $< -o $@
