@@ -84,11 +84,11 @@ t_stack	parse(int ac, char **av, void *mem_a)
 	o = stack_init(mem_a);
 	ac -= 1;
 	av += 1;
-	i = 0;
-	while (i < ac)
+	i = ac;
+	while (i)
 	{
+		i -= 1;
 		stack_push(&o, ft_atoi(av[i]));
-		i += 1;
 	}
 	return (o);
 }

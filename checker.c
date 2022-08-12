@@ -18,14 +18,15 @@ int main(int ac, char **av)
 	a = parse(ac, av, mem_a);
 	b = stack_init(mem_b);
 
+	dd(&a, &b);
 	while (1)
 	{
 		bytes = read(0, buffer, 3);
 		if (!bytes)
 			break ;
+	//	printf("-->'%.*s' [%i]\n", (int)bytes, buffer, (int) bytes);
 		if (buffer[2] == '\n')
 		{
-			// tthis is a 2 char instruction
 			if (!strncmp(buffer, "pa", 2))
 			{
 				pa(&a, &b);
@@ -44,7 +45,7 @@ int main(int ac, char **av)
 			}
 			else if (!strncmp(buffer, "ss", 2))
 			{
-				sa(&a, &b);
+				ss(&a, &b);
 			}
 			else if (!strncmp(buffer, "ra", 2))
 			{
@@ -56,18 +57,17 @@ int main(int ac, char **av)
 			}
 			else if (!strncmp(buffer, "rr", 2))
 			{
-				ss(&a, &b);
+				rr(&a, &b);
 			}
 			else
 			{
-				printf("Error\n");
+				printf("Error %i\n", __LINE__);
 				exit(0);
 			}
 	
 		}
 		else
 		{
-					// tthis is a 2 char instruction
 			if (!strncmp(buffer, "rrb", 3))
 			{
 				rrb(&a, &b);
@@ -82,13 +82,19 @@ int main(int ac, char **av)
 			}
 			else
 			{
-				printf("Error\n");
+				printf("Error %i\n", __LINE__);
 				exit(0);
 			}
-
-			// 3c
+			if (!read(0, buffer, 1))
+				break ;
+			else if (buffer[0] != '\n')
+			{
+				printf("Error %i\n", __LINE__);
+				exit(0);
+			}
 		}
+	dd(&a, &b);
 	}
 
-	dd(&a, &b);
+
 }

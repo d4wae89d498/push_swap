@@ -5,9 +5,9 @@ DEPS=Makefile common.h solver.h stack.h
 all: solver checker
 %.o: %.c $(DEPS)
 	cc $(CFLAGS) -c $< -o $@
-solver:	$(OBJS)
+solver:	$(OBJS) solver.c
 	cc $(CFLAGS) solver.c $(OBJS) -o solver
-checker: $(OBJS)
+checker: $(OBJS) checker.c
 	cc $(CFLAGS) checker.c $(OBJS) -o checker
 clean:
 	rm -rf $(OBJS)
