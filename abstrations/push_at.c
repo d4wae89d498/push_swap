@@ -11,6 +11,9 @@ int	find_index(t_stack s, int n)
 			break ;
 		i += 1;
 	}
+#if LOG == 1
+printf("index=%i for n=%i\n", i, n);
+#endif
 	return i;
 }
 
@@ -32,14 +35,26 @@ int	pb_at_rev(t_stack *a, t_stack *b, t_list **l, int n)
 	int	i;
 
 	i = 0;
-	if (!b->size)
+//	if (!b->size)
+//		return (pb(a, b, l));
+	if (n == b->size)
 		return (pb(a, b, l));
-	if (!n)
-		return (pb(a, b, l));
-	n = b->size - n;
-	i += do_x(a, b, l, n + 1, rb);
+/*	if (n == 0)
+	{
+		i += pb(a, b, l);
+		i += rb(a, b, l);
+		return (i);
+	}*/
+
+	if (n == 0)
+	{
+		i += pb(a, b, l);
+		i += rb(a, b, l);
+		return (i);
+	}
+	i += do_x(a, b, l, b->size - n, rb);
 	i += pb(a, b, l);
-	i += do_x(a, b, l, n, rrb);
+	i += do_x(a, b, l, b->size - n - 1, rrb);
 	return (i);
 }
 
@@ -48,7 +63,6 @@ int	pb_at(t_stack *a, t_stack *b, t_list **l, int n)
 	int	i;
 
 	i = 0;
-
 	if (!b->size)
 		return (pb(a, b, l));
 	if (n == b->size)

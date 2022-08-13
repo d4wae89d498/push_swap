@@ -10,7 +10,11 @@ int		push_rotate(t_stack *a, t_stack *b, t_list **l)
 	while (a->size)
 	{
 		index = find_index(*b, a->data[a->size - 1]);
-		i += pb_at(a, b, l, index);
+		
+		if (index < b->size / 2)
+			i += pb_at(a, b, l, index);
+		else
+			i += pb_at_rev(a, b, l, index);
 		dd(a, b, 0);
 	}
 	while (b->size)
