@@ -9,6 +9,7 @@ int	find_index(t_stack s, int n);
 int	do_x(t_stack *a, t_stack *b, t_list **l, int n,
 		int(*instr)(t_stack *a, t_stack *b, t_list **l));
 int	pb_at(t_stack *a, t_stack *b, t_list **l, int n);
+int	pb_at_rev(t_stack *a, t_stack *b, t_list **l, int n);
 /* strategies */
 int		push_rotate(t_stack *a, t_stack *b, t_list **l);
 
