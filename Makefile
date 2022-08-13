@@ -1,21 +1,21 @@
-CFLAGS=-Wall -Werror -Wextra -Iinclude
+CFLAGS=-Wall -Werror -Wextra -I.
 DEPS=Makefile\
-	include/list.h\
-	include/common.h\
-	include/stack.h\
-	include/solver.h
-COMMON_SRCS=src/common/instructions/rotate.c\
-	src/common/instructions/push.c\
-	src/common/instructions/dump.c\
-	src/common/instructions/reverse_rotate.c\
-	src/common/instructions/swap.c\
-	src/common/list.c\
-	src/common/stack.c\
-	src/common/parser.c
-CHECKER_SRCS=src/checker/main.c
-SOLVER_SRCS=src/solver/strategies/push_rotate.c\
-	src/solver/abstrations/push_at.c\
-	src/solver/main.c
+	list.h\
+	common.h\
+	stack.h\
+	solver.h
+COMMON_SRCS=instructions/rotate.c\
+	instructions/push.c\
+	instructions/dump.c\
+	instructions/reverse_rotate.c\
+	instructions/swap.c\
+	list.c\
+	stack.c\
+	parser.c
+CHECKER_SRCS=checker.c
+SOLVER_SRCS=strategies/push_rotate.c\
+	abstrations/push_at.c\
+	solver.c
 COMMON_OBJS=$(COMMON_SRCS:.c=.o)
 CHECKER_OBJS=$(CHECKER_SRCS:.c=.o)
 SOLVER_OBJS=$(SOLVER_SRCS:.c=.o)
