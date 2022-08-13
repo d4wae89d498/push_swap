@@ -19,15 +19,19 @@ SOLVER_SRCS=strategies/push_rotate.c\
 COMMON_OBJS=$(COMMON_SRCS:.c=.o)
 CHECKER_OBJS=$(CHECKER_SRCS:.c=.o)
 SOLVER_OBJS=$(SOLVER_SRCS:.c=.o)
-all: solver checker
+SOLVER=push_swap
+CHECKER=checker
+all: $(SOLVER) $(CHECKER)
 %.o: %.c $(DEPS)
 	cc $(CFLAGS) -c $< -o $@
-solver:	$(COMMON_OBJS) $(SOLVER_SRCS)
+$(SOLVER): $(COMMON_OBJS) $(SOLVER_SRCS)
 	cc $(CFLAGS) $(COMMON_OBJS) $(SOLVER_SRCS) -o $@
-checker: $(COMMON_OBJS) $(CHECKER_OBJS)
+$(CHECKER): $(COMMON_OBJS) $(CHECKER_OBJS)
 	cc $(CFLAGS) $(COMMON_OBJS) $(CHECKER_OBJS) -o $@
+test:
+	./Arktest_Push_Swap/arktest.sh
 clean:
 	rm -rf $(COMMON_OBJS) $(SOLVER_OBJS) $(CHECKER_OBJS)
 fclean:	clean
-	rm -f solver checker
+	rm -f $(SOLVER) $(CHECKER)
 re:	fclean all
