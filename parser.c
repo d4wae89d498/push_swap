@@ -1,11 +1,19 @@
 #include "common.h"
+#include "limits.h"
+#include "unistd.h"
 
 static int ft_atoi(char *s)
 {
-	int	o;
-	int	sign;
+	long long	o;
+	int			sign;
 
 	sign = 1;
+	if (!*s)
+	{
+		write(2, "Error\n", 6);
+		exit(0);
+
+	}
 	if (*s == '-')
 	{
 		sign = -1;
@@ -18,20 +26,26 @@ static int ft_atoi(char *s)
 	{
 		o *= 10;
 		o += *s - '0';
+		if (o > INT_MAX && sign == 1)
+			break ;
+		if (o > (-1 * (long long)INT_MIN) && sign == -1)
+			break ;
 		s += 1;
 	}
 	if (*s)
 	{
-		printf("error\n");
+		write(2, "Error\n", 6);
 		exit(0);
 	}
-	return (o * sign);
+	return ((int)o * sign);
 }
 
 t_stack	parse(int ac, char **av, void *mem_a)
 {
 	t_stack		o;
 	int			i;
+	int			y;
+	int			k;
 
 	if (ac < 2)
 	{
@@ -44,7 +58,19 @@ t_stack	parse(int ac, char **av, void *mem_a)
 	while (i)
 	{
 		i -= 1;
-		stack_push(&o, ft_atoi(av[i]));
+		k = ft_atoi(av[i]); 
+		y = 0;
+		while (y < o.size)
+		{
+			if (o.data[y] == k)
+			{
+				write(2, "Error\n", 6);
+				exit(0);
+			}
+			y += 1;
+		}
+		stack_push(&o, k);
+
 	}
 	return (o);
 }

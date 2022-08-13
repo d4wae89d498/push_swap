@@ -1,4 +1,5 @@
 #include "list.h"
+#include "unistd.h"
 
 t_list	*list_new(void *data)
 {
@@ -10,7 +11,6 @@ t_list	*list_new(void *data)
 	return (l);
 }
 
-#include <stdio.h>
 void	list_push(t_list **l, void *data)
 {
 	t_list	*n;
@@ -21,7 +21,7 @@ void	list_push(t_list **l, void *data)
 	if (!n)
 	{
 		list_free(l);
-		printf("Error\n");
+		write(2, "Error\n", 6);
 		exit(0);
 	}
 	list_attach(l, n);
