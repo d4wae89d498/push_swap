@@ -3,7 +3,7 @@
 int	sa(t_stack *a, t_stack *b, t_list **l)
 {
 	(void)b;
-    list_add(l, "sa");
+    list_push(l, "sa");
     stack_swap(*a);
 	return (1);
 }
@@ -11,14 +11,14 @@ int	sa(t_stack *a, t_stack *b, t_list **l)
 int	sb(t_stack *a, t_stack *b, t_list **l)
 {
     (void)a;
-    list_add(l, "sb");
+    list_push(l, "sb");
     stack_swap(*b);
 	return (1);
 }
 
 int	ss(t_stack *a, t_stack *b, t_list **l)
 {
-	list_add(l, "ss");
+	list_push(l, "ss");
     sa(a, b, 0);
     sb(a, b, 0);
 	return (1);

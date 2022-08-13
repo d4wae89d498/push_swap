@@ -10,6 +10,7 @@ t_list	*list_new(void *data)
 	return (l);
 }
 
+#include <stdio.h>
 void	list_push(t_list **l, void *data)
 {
 	t_list	*n;
@@ -43,12 +44,20 @@ void	list_attach(t_list **l, t_list *i)
 	t_list	*it;
 
 	if (!*l)
+	{
 		*l = i;
+		return ;
+	}
+
+
 	it = *l;
 	while (it)
 	{
 		if (!it->next)
+		{
 			it->next = i;
+			return;
+		}
 		it = it->next;
 	}
 }

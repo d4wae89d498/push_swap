@@ -8,28 +8,28 @@ int	max(int a, int b)
 	return b;
 }
 
-int		da(t_stack *a, t_stack *b, t_list **i)
+int		da(t_stack *a, t_stack *b, t_list **l)
 {	
-	(void) i;
+	(void) l;
 	(void) b;
 	stack_dump(*a);
 	return (0);
 }
 
-int		db(t_stack *a, t_stack *b, t_list **i)
+int		db(t_stack *a, t_stack *b, t_list **l)
 {
-	(void) i;
+	(void) l;
 	(void) a;
 	stack_dump(*b);
 	return (0);
 }
 
 #include <stdio.h>
-int		dd(t_stack *a, t_stack *b, t_list **i)
+int		dd(t_stack *a, t_stack *b, t_list **l)
 {
 	int	i;
 
-	(void) i;
+	(void) l;
 	i = max(a->size, b->size);
 	while (i)
 	{

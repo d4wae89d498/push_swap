@@ -16,7 +16,7 @@ int	rb(t_stack *a, t_stack *b, t_list **l)
 	return (1);
 }
 
-int	rr(t_stack *a, t_stack *b, t_lit **l)
+int	rr(t_stack *a, t_stack *b, t_list **l)
 {
 	list_push(l, "rr");
 	ra(a, b, 0);
