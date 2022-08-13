@@ -12,7 +12,18 @@ t_list	*list_new(void *data)
 
 void	list_push(t_list **l, void *data)
 {
-	list_attach(l, list_new(data));
+	t_list	*n;
+
+	if (!l)
+		return ;
+	n = list_new(data);
+	if (!n)
+	{
+		list_free(l);
+		printf("Error\n");
+		exit(0);
+	}
+	list_attach(l, n);
 }
 
 void	list_iter(t_list **l, void(*cb)(void*))

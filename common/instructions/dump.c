@@ -10,14 +10,18 @@ int	max(int a, int b)
 
 int		da(t_stack *a, t_stack *b, t_list **i)
 {	
+	(void) i;
 	(void) b;
 	stack_dump(*a);
+	return (0);
 }
 
 int		db(t_stack *a, t_stack *b, t_list **i)
 {
-	(void)a;
+	(void) i;
+	(void) a;
 	stack_dump(*b);
+	return (0);
 }
 
 #include <stdio.h>
@@ -25,6 +29,7 @@ int		dd(t_stack *a, t_stack *b, t_list **i)
 {
 	int	i;
 
+	(void) i;
 	i = max(a->size, b->size);
 	while (i)
 	{
@@ -42,6 +47,7 @@ int		dd(t_stack *a, t_stack *b, t_list **i)
 	}
 	printf("   \t-\t-\n");
 	printf("   \ta\tb\n-----------------------------------\n");
+	return (0);
 }
 
 

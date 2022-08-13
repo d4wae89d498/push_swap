@@ -1,0 +1,7 @@
+*.o
+*.out
+*.a
+checker_Mac
+checker_linux
+*.dSYM
+*.swp
