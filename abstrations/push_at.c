@@ -32,12 +32,11 @@ int	pb_at_rev(t_stack *a, t_stack *b, t_list **l, int n)
 	int	i;
 
 	i = 0;
-
-	n = b->size - n;
 	if (!b->size)
 		return (pb(a, b, l));
-	if (n == b->size)
+	if (!n)
 		return (pb(a, b, l));
+	n = b->size - n;
 	i += do_x(a, b, l, n + 1, rb);
 	i += pb(a, b, l);
 	i += do_x(a, b, l, n, rrb);

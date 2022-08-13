@@ -13,4 +13,5 @@ int	pb_at_rev(t_stack *a, t_stack *b, t_list **l, int n);
 /* strategies */
 int		push_rotate(t_stack *a, t_stack *b, t_list **l);
 
+int	find_index_rev(t_stack s, int n);
 #endif

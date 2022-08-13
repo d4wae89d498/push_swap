@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -Wextra -I.
+CFLAGS=-Wall -Werror -Wextra -I. -DLOG=0
 DEPS=Makefile\
 	list.h\
 	common.h\
