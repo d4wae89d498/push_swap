@@ -14,43 +14,48 @@ static int	find_index_of(t_stack *s, int n)
 	return (i);
 }
 
-t_instruction	order_a(t_stack *a, t_stack *ac)
+int	order_a(t_stack *a, t_stack *ac, t_list **l)
 {
-	static int		i;
-	t_instruction	ret;
-
+	int	i;
+	int	ret;
 	int	index;
-	
-
-	if (i < ac->size)
+	ret = 0;
+	i = 0;
+	while (i < ac->size)
 	{
 		index = find_index_of(a, ac->data[i]);
-		printf("sa_at [i=%i] with [index=%i]\n", i, index);
-		ret = swap_at(a, i, index, a->data[i], a->data[index]);
-		printf("ret=%p\n", ret);
+		printf("sb_at [index=%i (%i)] with [indexc=%i (%i)]\n", i, 
+			a->data[i],
+			index,
+			a->data[index]
+		);
+		ret += sa_at(a, l, i, index, a->data[i], a->data[index]);
 		dd(a, ac, 0);
-		if (ret)
-			return ret;
 		i += 1;
 	}
-	return (0);
+	return (ret);
 }
 
-t_instruction	order_b(t_stack *b, t_stack *bc)
+int	order_b(t_stack *b, t_stack *bc, t_list **l)
 {
-	static int	i;
+	int	i;
+	int	indexc;
 	int	index;
-	t_instruction	ret;
+	int	ret;
 
-	if (i < bc->size)
+	ret = 0;
+	i = 0;
+	while (i < bc->size)
 	{
-		index = find_index_of(b, bc->data[i]);
-		printf("sb_at [i=%i] with [index=%i]\n", i, index);
-		ret = swap_at(b, i, index, b->data[i], b->data[index]);
-		printf("ret=%p\n", ret);
-		if (ret)
-			return ret;
+		index = find_index_of(b, b->data[i]);
+		indexc = find_index_of(b, bc->data[i]);
+		printf("sb_at [index=%i (%i)] with [indexc=%i (%i)]\n", index, 
+			b->data[index],
+			indexc,
+			b->data[indexc]
+		);
+		ret += sb_at(b, l, index, indexc, b->data[indexc], b->data[index]);
 		i += 1;
 	}
-	return (0);
+	return (ret);
 }

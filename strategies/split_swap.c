@@ -2,9 +2,6 @@
 
 int	split_swap(t_stack *a, t_stack *b, t_list **l)
 {
-	t_instruction	ia;
-	t_instruction	ib;
-
 	int		index;
 	int	c;
 	int	i;
@@ -30,10 +27,19 @@ int	split_swap(t_stack *a, t_stack *b, t_list **l)
 	stack_clone(&ac, a);
 	stack_order_asc(&ac);
 
+
+	printf("a - ac:\n");
+	dd(a, &ac, 0);
+
 	stack_clone(&bc, b);
 	stack_order_asc(&bc);
-	
+	order_a(a, &ac, l);
 
+
+	printf("b - bc:\n");
+	dd(b, &bc, 0);
+
+/*
 	while (1)
 	{
 		ia = order_a(a, &ac);
@@ -58,7 +64,7 @@ int	split_swap(t_stack *a, t_stack *b, t_list **l)
 				break ;
 		}
 
-	}
+	}*/
 	printf("FINAL::\n");
 	dd(a, b, l);
 

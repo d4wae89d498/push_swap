@@ -1,146 +1,55 @@
 #include "solver.h"
 
-t_instruction	swap_at(t_stack *s, int x, int y, int vx, int vy)
+int	sa_at(t_stack *s, t_list **l, int x, int y, int vx, int vy)
 {
-	if (!s->size || x == y || s->size == 1)
-		return (0);
-	if (s->data[x] == vy && s->data[y] == vx)
-		return (0);
-	if (x > y)
-	{
-		if (s->size - x < y)
-		{
-			printf("rotate to top until x\n");
-			if (x - y < s->size / 2)
-			{
-				printf("swp until y to bottom\n");
-				if (s->data[s->size - 1] == vx)
-					return sa;
-				else if (s->data[s->size - 2] == vx)
-					return ra;
-				else if (s->data[s->size - 1] == vy)
-					return rra;
-				else if (s->data[s->size - 2] == vy)
-					return sa;
-				else
-					return ra;
-			}
-			else
-			{
-				printf("swp until y to top\n");
-				if (s->data[s->size - 2] == vx)
-					return sa;
-				else if (s->data[s->size - 1] == vx)
-					return rra;
-				else if (s->data[s->size - 1] == vy)
-					return ra;
-				else if (s->data[s->size - 2] == vy)
-					return sa;
-				else
-					return ra;
-			}
-		}
-		else
-		{
-			printf("rotate to bottom until y\n");
-			if (x - y < s->size / 2)
-			{
-				printf("swap until x to bottom\n");
-				if (s->data[s->size - 1] == vy)
-					return sa;
-				else if (s->data[s->size - 2] == vy)
-					return ra;
-				else if (s->data[s->size - 1] == vx)
-					return rra;
-				else if (s->data[s->size - 2] == vx)
-					return sa;
+	int	i;
 
-				else
-					return ra;
-			}
-			else
-			{
-				printf("swap until x to top\n");
-				if (s->data[s->size - 2] == vy)
-					return sa;
-				else if (s->data[s->size - 1] == vy)
-					return ra;
-				else if (s->data[s->size - 1] == vx)
-					return rra;
-				else if (s->data[s->size - 2] == vx)
-					return sa;
-
-				else
-					return ra;
-			}
-		}
-	}
-	else
+	(void) y;
+	(void) x;
+	(void) vy;
+	(void) vx;
+	i = 0;
+	if (!s->size || s->size == 1)
+		return (0);
+	while (s->data[s->size - 1] != vx)
 	{
-		if (s->size - y < x)
-		{
-			printf("rotate to top until y\n");
-			if (y - x < s->size / 2)
-			{
-				printf("swap until x to bottom\n");
-				if (s->data[s->size - 1] == vy)
-					return sa;
-				else if (s->data[s->size - 2] == vy)
-					return ra;
-				else if (s->data[s->size - 1] == vx)
-					return rra;
-				else if (s->data[s->size - 2] == vx)
-					return sa;
-				else
-					return ra;
-			}
-			else
-			{
-				printf("swap until x to top\n");
-				if (s->data[s->size - 2] == vy)
-					return sa;
-				else if (s->data[s->size - 1] == vy)
-					return rra;
-				else if (s->data[s->size - 1] == vx)
-					return ra;
-				else if (s->data[s->size - 2] == vx)
-					return sa;
-				else
-					return ra;
-			}
-		}
-		else
-		{
-			printf("rotate to bottom until x\n");
-			if (y - x < s->size / 2)
-			{
-				printf("swap until y to bottom\n");
-				if (s->data[s->size - 1] == vx)
-					return sa;
-				else if (s->data[s->size - 2] == vx)
-					return ra;
-				else if (s->data[s->size - 1] == vy)
-					return rra;
-				else if (s->data[s->size - 2] == vy)
-					return sa;
-				else
-					return ra;
-			}
-			else
-			{
-				printf("swap until y to top\n");
-				if (s->data[s->size - 2] == vx)
-					return sa;
-				else if (s->data[s->size - 1] == vx)
-					return rra;
-				else if (s->data[s->size - 1] == vy)
-					return ra;
-				else if (s->data[s->size - 2] == vy)
-					return sa;
-				else
-					return ra;
-			}
-		}
+		i += ra(s, 0, l);
 	}
+	int z = 0;
+	while (z < 2)
+	{
+		i += sa(s, 0, l);
+		i += rra(s, 0, l);
+		z += 1;
+	}
+
+
+/*	while (s->data[s->size - 1] != vy)
+	{
+		i += sa(s, 0, l);
+		i += ra(s, 0, l);
+	}
+	while (s->data[y] == vy)
+	{
+		i += rra(s, 0, l);
+		i += sa(s, 0, l);
+	}
+	int	z = 0;
+	while (y < abs(x - y))
+	{
+		i += rra(s, 0, l);
+		z += 1;
+	}*/
+	return (i);
+}
+
+int	sb_at(t_stack *s, t_list **l, int x, int y, int vx, int vy)
+{
+	(void) s;
+	(void) l;
+	(void) x;
+	(void) y;
+	(void) vx;
+	(void) vy;
 	return (0);
 }
