@@ -7,6 +7,7 @@
 #  define ARG_MAX 262144
 # endif
 
+typedef int(*t_instruction)(t_stack *a, t_stack *b, t_list **l);
 
 /* common1.c */
 int	sa(t_stack *a, t_stack *b, t_list **i);

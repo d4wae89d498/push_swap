@@ -38,7 +38,8 @@ int	main(int ac, char **av)
 		exit(0);
 	b = stack_init(mem_b);
 	instructions = 0;
-	ic = push_rotate(&a, &b, &instructions);
+//	ic = push_rotate(&a, &b, &instructions);
+	ic = split_swap(&a, &b, &instructions);
 	list_iter(&instructions, (void*) putstr);
 	list_free(&instructions);
 	return (0);
