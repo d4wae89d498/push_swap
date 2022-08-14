@@ -14,7 +14,7 @@ static int	find_index_of(t_stack *s, int n)
 	return (i);
 }
 
-int	order_a(t_stack *a, t_stack *ac, t_list **l)
+int	order_a(t_stack *a, t_stack *b, t_stack *ac, t_list **l)
 {
 	int	i;
 	int	ret;
@@ -29,32 +29,30 @@ int	order_a(t_stack *a, t_stack *ac, t_list **l)
 			index,
 			a->data[index]
 		);
-		ret += sa_at(a, l, i, index, a->data[i], a->data[index]);
-		dd(a, ac, 0);
+		ret += sa_at(a, b, l, i, index, a->data[i], a->data[index]);
+		dd(a, b, 0);
 		i += 1;
 	}
 	return (ret);
 }
 
-int	order_b(t_stack *b, t_stack *bc, t_list **l)
+int	order_b(t_stack *a, t_stack *b, t_stack *bc, t_list **l)
 {
 	int	i;
-	int	indexc;
-	int	index;
 	int	ret;
-
+	int	index;
 	ret = 0;
 	i = 0;
 	while (i < bc->size)
 	{
-		index = find_index_of(b, b->data[i]);
-		indexc = find_index_of(b, bc->data[i]);
-		printf("sb_at [index=%i (%i)] with [indexc=%i (%i)]\n", index, 
-			b->data[index],
-			indexc,
-			b->data[indexc]
+		index = find_index_of(b, bc->data[i]);
+		printf("sb_at [index=%i (%i)] with [indexc=%i (%i)]\n", i, 
+			b->data[i],
+			index,
+			b->data[index]
 		);
-		ret += sb_at(b, l, index, indexc, b->data[indexc], b->data[index]);
+		ret += sb_at(a, b, l, i, index, b->data[i], b->data[index]);
+		dd(a, b, 0);
 		i += 1;
 	}
 	return (ret);

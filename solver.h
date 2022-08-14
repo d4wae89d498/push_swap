@@ -4,6 +4,16 @@
 # include "stdio.h"
 # include "stdlib.h"
 
+
+
+typedef struct
+{
+	t_instruction	rr;
+	t_instruction	r;
+	t_instruction	p;
+	t_instruction	s;
+}	t_stack_instructions;
+
 /* abstrations */
 int	find_index(t_stack s, int n);
 int	find_index_rev(t_stack s, int n);
@@ -15,11 +25,11 @@ int	pa_at(t_stack *a, t_stack *b, t_list **l, int n);
 int	pa_at_rev(t_stack *a, t_stack *b, t_list **l, int n);
 
 
-int	sa_at(t_stack *s, t_list **l, int x, int y, int vx, int vy);
-int	sb_at(t_stack *s, t_list **l, int x, int y, int vx, int vy);
+int	sa_at(t_stack *a, t_stack *b, t_list **l, int x, int y, int vx, int vy);
+int	sb_at(t_stack *a, t_stack *b, t_list **l, int x, int y, int vx, int vy);
 
-int	order_a(t_stack *a, t_stack *ac, t_list **l);
-int	order_b(t_stack *b, t_stack *bc, t_list **l);
+int	order_a(t_stack *a, t_stack *b, t_stack *ac, t_list **l);
+int	order_b(t_stack *a, t_stack *b, t_stack *bc, t_list **l);
 
 
 int	find_index_rev(t_stack s, int n);
