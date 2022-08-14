@@ -24,7 +24,7 @@ int	order_a(t_stack *a, t_stack *ac, t_list **l)
 	while (i < ac->size)
 	{
 		index = find_index_of(a, ac->data[i]);
-		printf("sb_at [index=%i (%i)] with [indexc=%i (%i)]\n", i, 
+		printf("sa_at [index=%i (%i)] with [indexc=%i (%i)]\n", i, 
 			a->data[i],
 			index,
 			a->data[index]

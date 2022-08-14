@@ -2,44 +2,50 @@
 
 int	sa_at(t_stack *s, t_list **l, int x, int y, int vx, int vy)
 {
-	int	i;
+	int		i;
+	int		k;
+	int		z;
 
 	(void) y;
 	(void) x;
+	(void) z;
 	(void) vy;
 	(void) vx;
+	
+	k = 0;
 	i = 0;
 	if (!s->size || s->size == 1)
 		return (0);
+	if (vx == vy)
+		return (0);
+	if (s->size == 2 || x + y == 2 * s->size - 3)
+		return (sa(s, 0, l));
 	while (s->data[s->size - 1] != vx)
 	{
-		i += ra(s, 0, l);
-	}
-	int z = 0;
-	while (z < 2)
-	{
-		i += sa(s, 0, l);
-		i += rra(s, 0, l);
-		z += 1;
+		 i += ra(s, 0, l);
+			k += 1;
 	}
 
-
-/*	while (s->data[s->size - 1] != vy)
+	while (s->data[s->size - 2] != vy)
 	{
 		i += sa(s, 0, l);
 		i += ra(s, 0, l);
 	}
-	while (s->data[y] == vy)
+	da(s, 0, 0);
+	z = abs(x - y) - 1;
+	while (z)
 	{
-		i += rra(s, 0, l);
+		i += ra(s, 0, l);
 		i += sa(s, 0, l);
+
+		z -= 1;
 	}
-	int	z = 0;
-	while (y < abs(x - y))
+	while (k > 1)
 	{
 		i += rra(s, 0, l);
-		z += 1;
-	}*/
+		k -= 1;
+	}
+
 	return (i);
 }
 
