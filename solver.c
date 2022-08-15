@@ -42,5 +42,7 @@ int	main(int ac, char **av)
 	ic = split_swap(&a, &b, &instructions);
 	list_iter(&instructions, (void*) putstr);
 	list_free(&instructions);
+
+	dd(&a, &b, 0);
 	return (0);
 }

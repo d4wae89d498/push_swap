@@ -24,13 +24,8 @@ int	order_a(t_stack *a, t_stack *b, t_stack *ac, t_list **l)
 	while (i < ac->size)
 	{
 		index = find_index_of(a, ac->data[i]);
-		printf("sa_at [index=%i (%i)] with [indexc=%i (%i)]\n", i, 
-			a->data[i],
-			index,
-			a->data[index]
-		);
 		ret += sa_at(a, b, l, i, index, a->data[i], a->data[index]);
-		dd(a, b, 0);
+	//	dd(a, b, 0);
 		i += 1;
 	}
 	return (ret);
@@ -46,13 +41,8 @@ int	order_b(t_stack *a, t_stack *b, t_stack *bc, t_list **l)
 	while (i < bc->size)
 	{
 		index = find_index_of(b, bc->data[i]);
-		printf("sb_at [index=%i (%i)] with [indexc=%i (%i)]\n", i, 
-			b->data[i],
-			index,
-			b->data[index]
-		);
 		ret += sb_at(a, b, l, i, index, b->data[i], b->data[index]);
-		dd(a, b, 0);
+		//dd(a, b, 0);
 		i += 1;
 	}
 	return (ret);

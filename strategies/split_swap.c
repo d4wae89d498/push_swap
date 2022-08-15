@@ -1,5 +1,71 @@
 #include "solver.h"
 
+//todo :: impl me
+
+#include <string.h>
+
+static int eval_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib, t_list **l)
+{
+	int	i = 0;
+
+	t_list	*it_a;
+	t_list	*it_b;
+
+	it_a = ia;
+	it_b = ib;
+	while (it_a || it_b)
+	{
+		if (it_a && it_b)
+		{
+			if (!strcmp(it_a->data, "sa") && !strcmp(it_b->data, "sb"))
+			{
+				i += ss(a, b, l);
+				goto next;
+			}
+			else if (!strcmp(it_a->data, "ra") && !strcmp(it_b->data, "rb"))
+			{
+				i += rr(a, b, l);
+				goto next;
+			}
+			else if (!strcmp(it_a->data, "rra") && !strcmp(it_b->data, "rrb"))
+			{
+				i += rrr(a, b, l);
+				goto next;
+			}
+		}
+		if (it_a)
+		{
+
+			if (!strcmp(it_a->data, "pa"))
+				i += pa(a, b, l);
+			else if (!strcmp(it_a->data, "sa"))
+				i += sa(a, b, l);
+			else if (!strcmp(it_a->data, "ra"))
+				i += ra(a, b, l);
+			else if (!strcmp(it_a->data, "rra"))
+				i += rra(a, b, l);
+		}
+
+		if (it_b)
+		{
+			if (!strcmp(it_b->data, "pb"))
+				i += pb(a, b, l);
+			else if (!strcmp(it_b->data, "sb"))
+				i += sb(a, b, l);
+			else if (!strcmp(it_b->data, "rb"))
+				i += rb(a, b, l);
+			else if (!strcmp(it_b->data, "rrb"))
+				i += rrb(a, b, l);
+		}
+next:
+		if (it_a)
+			it_a = it_a->next;
+		if (it_b)
+			it_b = it_b->next;
+	}
+	return (i);
+}
+
 int	split_swap(t_stack *a, t_stack *b, t_list **l)
 {
 	int		index;
@@ -12,89 +78,65 @@ int	split_swap(t_stack *a, t_stack *b, t_list **l)
 
 	bc = stack_init(mem_bc);
 	ac = stack_init(mem_ac);
-	dd(a, b, 0);
 	i = 0;
-	c = a->size / 2;
-	while (c)
+	c = 0;
+	stack_clone(&ac, a);
+	stack_order_asc(&ac);
+	int p = ac.data[ac.size / 2];
+	int	t = ac.size;
+	while (c < t)
 	{
-		i += pb(a, b, l);
-		c -= 1;
-//		dd(a, b, 0);
+		if (a->data[a->size - 1] < p)
+			i += pb(a, b, l);
+		else
+			i += ra(a, b, l);
+		c += 1;
+	}
+	c = 0;
+	while (c < a->size/2)
+	{
+		i += rra(a, b, l);
+		c += 1;
 	}
 
 
-	// TODO :: CLONE STACKS AND FIND OPTIMAL SWAPS
+
 	stack_clone(&ac, a);
 	stack_order_asc(&ac);
-
-
-	stack_clone(&bc, b);
-	stack_order_asc(&bc);
-
-
-	order_a(a, b, &ac, l);
-
-
-	order_b(a, b, &bc, l);
-
-
-	printf("________________\n");
-	printf("dd:\n");
-	dd(a, b, 0);
-	printf("---------====----==-=-=\n");
-/*
-	while (1)
-	{
-		ia = order_a(a, &ac);
-		ib = order_b(b, &bc);
-	
-		if (ia == sa && ib == sb)
-			ss(a, b, l);
-		else if (ia == ra && ib == rb)
-			rr(a, b, l);
-		else if (ia == rra && ib == rrb)
-			rrr(a, b, l);
-		else
-		{
-			if (ia)
-				ia(a, b, l);
-			if (ib)
-				ib(a, b, l);
-		}
-		if (!ia && !ib)
-		{
-			printf("END\n");
-				break ;
-		}
-
-	}*/
-/*	printf("FINAL::\n");
-
-	dd(a, b, 0);
-
-	exit(0);*/
-/*
 	stack_clone(&bc, b);
 	stack_order_desc(&bc);
+	
+
+	t_list	*ia = 0;
+	t_list	*ib = 0;
 
 
-	order_b(a, &ac, l);*/
+	static int	mem_bcc[ARG_MAX];
+	t_stack		bcc;
+	static int	mem_acc[ARG_MAX];
+	t_stack		acc;
 
-		//dd(&ac, &bc, 0);
+	bcc = stack_init(mem_bcc);
+	acc = stack_init(mem_acc);
+
+
+	stack_clone(&acc, a);
+	stack_clone(&bcc, b);
+
+	order_a(&acc, &bcc, &ac, &ia);
+	order_b(&acc, &bcc, &bc, &ib);
+
+	i += eval_instructions(a, b, ia, ib, l);
+
 
 	while (b->size)
 	{
 		index = find_index_rev(*a, b->data[b->size - 1]);
-	
+
 		if (index < a->size / 2)
 			i += pa_at(a, b, l, index);
 		else
 			i += pa_at_rev(a, b, l, index);
-		//break ;
-		//i += pa(a, b, l);
 	}
-
-	dd(a, b, 0);
-	exit(0);
 	return (i);
 }
