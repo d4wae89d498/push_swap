@@ -107,25 +107,30 @@ int	split_swap(t_stack *a, t_stack *b, t_list **l)
 	stack_order_desc(&bc);
 	
 
-	t_list	*ia = 0;
-	t_list	*ib = 0;
 
 
-	static int	mem_bcc[ARG_MAX];
-	t_stack		bcc;
+
 	static int	mem_acc[ARG_MAX];
 	t_stack		acc;
-
-	bcc = stack_init(mem_bcc);
+	static int	mem_bcc[ARG_MAX];
+	t_stack		bcc;
 	acc = stack_init(mem_acc);
-
-
+	bcc = stack_init(mem_bcc);
 	stack_clone(&acc, a);
 	stack_clone(&bcc, b);
-
+	t_list	*ia = 0;
+	t_list	*ib = 0;
+/*
 	order_a(&acc, &bcc, &ac, &ia);
 	order_b(&acc, &bcc, &bc, &ib);
+**/
 
+
+	bubble_sort_a(&acc, &bcc, &ia);
+	bubble_sort_b(&acc, &bcc, &ib);
+//	dd(&acc, &bcc, 0);
+
+//	exit(0);
 	i += eval_instructions(a, b, ia, ib, l);
 
 

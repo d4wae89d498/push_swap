@@ -33,6 +33,24 @@ int	order_b(t_stack *a, t_stack *b, t_stack *bc, t_list **l);
 
 
 int	find_index_rev(t_stack s, int n);
+
+
+int	bubble_sort_a(t_stack *a, t_stack *b, t_list **l);
+
+int	bubble_sort_b(t_stack *a, t_stack *b, t_list **l);
+
+int	swap_at(
+		t_stack *a, 
+		t_stack *b, 
+		t_list **l, 
+		int x, 
+		int y, 
+		int vx, 
+		int vy, 
+		t_stack *s, 
+		t_stack_instructions si
+);
+
 /* strategies */
 
 int		push_rotate(t_stack *a, t_stack *b, t_list **l);

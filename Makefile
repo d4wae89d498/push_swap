@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -Wextra -I. -DLOG=0 #-g
+CFLAGS=-Wall -Werror -Wextra -I. -DLOG=1 #-g
 DEPS=Makefile\
 	list.h\
 	common.h\
@@ -18,6 +18,7 @@ SOLVER_SRCS=strategies/push_rotate.c\
 	abstrations/push_at.c\
 	abstrations/swap_at.c\
 	abstrations/order.c\
+	abstrations/bubble_sort.c\
 	solver.c
 COMMON_OBJS=$(COMMON_SRCS:.c=.o)
 CHECKER_OBJS=$(CHECKER_SRCS:.c=.o)
