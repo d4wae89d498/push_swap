@@ -39,6 +39,7 @@ int	bubble_sort_a(t_stack *a, t_stack *b, t_list **l);
 
 int	bubble_sort_b(t_stack *a, t_stack *b, t_list **l);
 
+int	insertion_sort(t_stack *s, t_list **l, t_stack_instructions si, int desc);
 int	swap_at(
 		t_stack *a, 
 		t_stack *b, 
@@ -51,9 +52,15 @@ int	swap_at(
 		t_stack_instructions si
 );
 
+int	is_sorted_asc(t_stack *s);
+int	is_sorted_desc(t_stack *s);
+
+int	is_sorted(t_stack *s, int desc);
+int 	cmp(t_stack *s, int ix, int iy, int desc);
+int		sort_five(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructions si);
 /* strategies */
 
 int		push_rotate(t_stack *a, t_stack *b, t_list **l);
 int		split_swap(t_stack *a, t_stack *b, t_list **l);
-
+int		radix(t_stack *a, t_stack *b, t_list **l);
 #endif

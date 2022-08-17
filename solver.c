@@ -40,6 +40,7 @@ int	main(int ac, char **av)
 	instructions = 0;
 //	ic = push_rotate(&a, &b, &instructions);
 	ic = split_swap(&a, &b, &instructions);
+//	ic = radix(&a, &b, &instructions);
 	list_iter(&instructions, (void*) putstr);
 	list_free(&instructions);
 
