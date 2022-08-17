@@ -34,19 +34,6 @@ int	eval_b(t_stack *a, t_stack *b, t_list **l, char *str)
 	return (i);
 }
 
-int	apply_reverse_order_opt(t_list **l)
-{
-	t_list	*it;
-	
-
-	it = *l;
-	while (it)
-	{
-		it = it->next;
-	}
-	return (0);
-}
-
 static int	merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib, t_list **l)
 {
 	int	i = 0;
