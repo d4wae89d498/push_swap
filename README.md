@@ -8,3 +8,4 @@ TODO:
 - [x] split compliations in 2 independant instructions list
 - [ ] merge the 2 independants instructions list when possible that we could optimise using ss/rr/rrr
 - [ ] split_swap strategy: instead of spliting 2 stack in the middle, take all number greater or lower than the mediam value
+- [ ] add more strategies with sort algos that have best locality of reference for handling bigger array
