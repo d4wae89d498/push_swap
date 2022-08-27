@@ -38,9 +38,14 @@ int	main(int ac, char **av)
 		exit(0);
 	b = stack_init(mem_b);
 	instructions = 0;
+// WORKING :
 //	ic = push_rotate(&a, &b, &instructions);
 	ic = split_swap(&a, &b, &instructions);
 //	ic = radix(&a, &b, &instructions);
+
+// WIP :
+//	ic = quick_sort(&a, &b, &instructions);
+//	ic = bool_tree(&a, &b, &instructions);
 	list_iter(&instructions, (void*) putstr);
 	list_free(&instructions);
 

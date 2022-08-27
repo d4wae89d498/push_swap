@@ -63,4 +63,6 @@ int		sort_five(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructi
 int		push_rotate(t_stack *a, t_stack *b, t_list **l);
 int		split_swap(t_stack *a, t_stack *b, t_list **l);
 int		radix(t_stack *a, t_stack *b, t_list **l);
+int		bool_tree(t_stack *a, t_stack *b, t_list **l);
+int		quick_sort(t_stack *a, t_stack *b, t_list **l);
 #endif

@@ -38,8 +38,6 @@ int	insertion_sort(t_stack *s, t_list **l, t_stack_instructions si, int desc)
 				i += si.r(s, s, l);
 			}
 		}
-
-
 //		printf("j=%i\n", j);
 		j += 1;
 	}

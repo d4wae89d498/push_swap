@@ -1,5 +1,10 @@
 TODO:
 
+- [ ] 2-3 instructions for 3 integers
+- [ ] 12 instructions for 5 integers
+- [ ] 700 instructions for 100 integers
+- [ ] 5000 instructions for 500 integers
+
 - [x] working base algo
 - [x] detect if inserting from reverse order is shorter 
 - [x] sort the stacks once first and then find the minimal swap for generataed number positions 

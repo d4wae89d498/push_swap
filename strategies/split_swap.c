@@ -146,13 +146,13 @@ int	split_swap(t_stack *a, t_stack *b, t_list **l)
 	ac = stack_init(mem_ac);
 	i = 0;
 	
-/*	i += insertion_sort(a, l, 
-			(t_stack_instructions) {
-			.r=ra, 
-			.rr=rra, 
-			.p=pa, 
-			.s=sa
-		}, 0);*/
+//	i += insertion_sort(a, l, 
+//			(t_stack_instructions) {
+//			.r=ra, 
+//			.rr=rra, 
+//			.p=pa, 
+//			.s=sa
+//		}, 0);
 	//sort_five(a, b, a, l, (t_stack_instructions) {.r=ra, .rr=rra, .s=sa, .p=pa});
 //	dd(a, b, 0);
 //	exit(0);
