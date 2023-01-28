@@ -12,6 +12,14 @@ static void	putstr(char *str)
 	write(1, "\n", 1);
 }
 
+/*
+ *	1) Parse av into stack a
+ *	2) Check if stack a is already ordered, if so exit
+ *	3) Init stack b
+ *	4) Check if a stack a is small, if so apply small orders algo and exit
+ *	5) Apply long sort algos
+ *
+ */ 
 int	main(int ac, char **av)
 {
 	static int	mem_a[ARG_MAX];
@@ -36,16 +44,42 @@ int	main(int ac, char **av)
 	}
 	if (y == a.size - 1)
 		exit(0);
-	b = stack_init(mem_b);
-	instructions = 0;
-// WORKING :
-//	ic = push_rotate(&a, &b, &instructions);
-	ic = split_swap(&a, &b, &instructions);
-//	ic = radix(&a, &b, &instructions);
 
+	b = stack_init(mem_b);
+	
+	dd(&a, &b, 0);
+	instructions = 0;
+
+	/*
+	if (ac == 4)
+	{
+		ic = 0;
+		sort_tree(&a, &b, &a, &instructions, (t_stack_instructions) {
+			.rr=rra,
+			.r=ra,
+			.p=pa,
+			.s=sa
+		});
+	}
+	else 
+	{
+		// WORKING :
+		//	ic = push_rotate(&a, &b, &instructions);
+		ic = split_swap(&a, &b, &instructions);
+		//	ic = radix(&a, &b, &instructions);
+	}
 // WIP :
 //	ic = quick_sort(&a, &b, &instructions);
 //	ic = bool_tree(&a, &b, &instructions);
+	
+*/
+	ic = sort_p(&a, &b, &a, &instructions, (t_stack_instructions) {
+		.rr=rra,
+		.r=ra,
+		.p=pa,
+		.s=sa
+	});
+
 	list_iter(&instructions, (void*) putstr);
 	list_free(&instructions);
 

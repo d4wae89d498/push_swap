@@ -57,6 +57,7 @@ int	is_sorted_desc(t_stack *s);
 
 int	is_sorted(t_stack *s, int desc);
 int 	cmp(t_stack *s, int ix, int iy, int desc);
+int		sort_tree(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructions si);
 int		sort_five(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructions si);
 /* strategies */
 
@@ -65,4 +66,7 @@ int		split_swap(t_stack *a, t_stack *b, t_list **l);
 int		radix(t_stack *a, t_stack *b, t_list **l);
 int		bool_tree(t_stack *a, t_stack *b, t_list **l);
 int		quick_sort(t_stack *a, t_stack *b, t_list **l);
+
+
+int	sort_p(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructions si);
 #endif

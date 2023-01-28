@@ -1,11 +1,5 @@
 #include "solver.h"
 
-int 	cmp(t_stack *s, int ix, int iy, int desc)
-{
-	if (desc)
-		return (s->data[ix] > s->data[iy]);
-	return (s->data[ix] < s->data[iy]);
-}
 
 int		sort_five(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructions si)
 {

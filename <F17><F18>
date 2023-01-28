@@ -1,0 +1,50 @@
+#include "solver.h"
+
+static t_stack *build_stage(t_stack *s)
+{
+	int 		y;
+	t_stacl 	o;
+	
+	if (!s->size)
+		return 0;
+
+	o = malloc(sizeof(t_stack));
+	o->size = s->size - 1;
+	o->data = malloc(o->size * sizeof(int));
+
+	y = 0;
+	while (y < s->size - 2)
+	{
+		if (s->data[y] > s->data[y + 1])
+			o->data[y] = s->data[y] + s->data[y + 1];
+		else
+			o->data[y] = 0;
+		y += 1;
+	}
+
+	return o;
+}
+
+int	sort_p(t_stack *a, t_stack *b, t_stack *s, t_list **l, t_stack_instructions si)
+{
+	int		i = 0;
+	int		desc;
+	t_stack	*new_s;
+	t_stack *stage;
+
+	desc = s == b;
+	new_s = malloc( sizeof(t_stack) );
+	new_s->size = s->size + 1;
+	new_s->data = malloc( new_s->size * sizeof(int) );
+
+	i = 0;
+	while (i < new_s->size - 2)
+	{
+		new_s->data[i] = s->data[i];
+		i += 1;
+	}
+	new_s->data[i] = s->data[0];
+
+	stage = build_stage(new_s);
+	dd(stage, stage, 0);
+}
