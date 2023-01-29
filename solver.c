@@ -50,35 +50,31 @@ int	main(int ac, char **av)
 	dd(&a, &b, 0);
 	instructions = 0;
 
-	/*
-	if (ac == 4)
+
+/*	if (ac == 4)
 	{
-		ic = 0;
 		sort_tree(&a, &b, &a, &instructions, (t_stack_instructions) {
 			.rr=rra,
 			.r=ra,
 			.p=pa,
 			.s=sa
 		});
+	}*/
+	if (ac <= 6)
+	{
+		ic = bool_tree(&a, &b, &instructions);
+	}
+	else if (ac <= 27)//ac <= 10)
+	{
+		//ic = push_rotate(&a, &b, &instructions);
+		ic = split_swap(&a, &b, &instructions);
 	}
 	else 
 	{
-		// WORKING :
-		//	ic = push_rotate(&a, &b, &instructions);
-		ic = split_swap(&a, &b, &instructions);
-		//	ic = radix(&a, &b, &instructions);
+			ic = radix(&a, &b, &instructions);
+		//	ic = quick_sort(&a, &b, &instructions);
 	}
-// WIP :
-//	ic = quick_sort(&a, &b, &instructions);
-//	ic = bool_tree(&a, &b, &instructions);
-	
-*/
-	ic = sort_p(&a, &b, &a, &instructions, (t_stack_instructions) {
-		.rr=rra,
-		.r=ra,
-		.p=pa,
-		.s=sa
-	});
+
 
 	list_iter(&instructions, (void*) putstr);
 	list_free(&instructions);
