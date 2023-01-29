@@ -64,7 +64,7 @@ int	main(int ac, char **av)
 	{
 		ic = bool_tree(&a, &b, &instructions);
 	}
-	else if (ac <= 27)//ac <= 10)
+	else if (ac <= 26)//ac <= 10)
 	{
 		//ic = push_rotate(&a, &b, &instructions);
 		ic = split_swap(&a, &b, &instructions);
