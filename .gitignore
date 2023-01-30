@@ -7,3 +7,4 @@ checker_Mac
 checker_linux
 *.dSYM
 *.swp
+.DS_Store
