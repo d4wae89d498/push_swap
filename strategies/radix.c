@@ -1,10 +1,10 @@
 #include "solver.h"
 #include "limits.h"
 
-static int get_max(t_stack *s)
+static int	get_max(t_stack *s)
 {
-	int max;
-	int i;
+	int	max;
+	int	i;
 
 	max = INT_MIN;
 	i = 0;
@@ -17,65 +17,22 @@ static int get_max(t_stack *s)
 	return (max);
 }
 
-static void set_index(t_stack *s)
+static int radix_util(t_stack *a, t_stack *b, t_list **l, int bits)
 {
-	static int mem_data_sc[ARG_MAX];
-	t_stack sc;
-
-	static int passed[ARG_MAX];
-	int i;
-	int j;
-
-	sc = stack_init(mem_data_sc);
-	stack_clone(&sc, s);
-	stack_order_asc(&sc);
-
-	i = 0;
-	while (i < s->size)
-	{
-		j = 0;
-		while (j < s->size)
-		{
-			if (!passed[j] && s->data[j] == sc.data[i])
-			{
-				passed[j] = 1;
-				s->data[j] = s->size - i;
-			}
-			j += 1;
-		}
-		i += 1;
-	}
-}
-
-int radix(t_stack *a, t_stack *b, t_list **l)
-{
-	int i;
-	int size;
-	int bits;
-	int n;
-	int j;
-	int k;
-
-	i = 0;
-	while (i < a->size)
-	{
-		i += 1;
-	}
-	set_index(a);
-
+	int	j;
+	int	k;
+	int	i;
+	int	size;
 
 	size = a->size;
-	bits = 0;
-	n = get_max(a);
-	while (n >> bits)
-		bits += 1;
+	i = 0;
 	j = 0;
 	while (j < bits)
 	{
 		k = 0;
 		while (k < size)
 		{
-			if ((((a->data[a->size - 1]) >> j)&1))
+			if ((((a->data[a->size - 1]) >> j) & 1))
 				i += ra(a, b, l);
 			else
 				i += pb(a, b, l);
@@ -86,4 +43,17 @@ int radix(t_stack *a, t_stack *b, t_list **l)
 		j += 1;
 	}
 	return (i);
+}
+
+int radix(t_stack *a, t_stack *b, t_list **l)
+{
+	int bits;
+	int n;
+
+	set_index(a, 0);
+	bits = 0;
+	n = get_max(a);
+	while (n >> bits)
+		bits += 1;
+	return (radix_util(a, b, l, bits));
 }

@@ -1,7 +1,6 @@
 #include "list.h"
 #include "unistd.h"
 
-
 t_list	*list_new(void *data)
 {
 	t_list	*l;
@@ -11,13 +10,10 @@ t_list	*list_new(void *data)
 	l->next = 0;
 	return (l);
 }
-#include <stdio.h>
+
 void	list_push(t_list **l, void *data)
 {
 	t_list	*n;
-#if LOG == 1
-	printf("%s\n", data);
-#endif
 
 	if (!l)
 		return ;
@@ -52,15 +48,13 @@ void	list_attach(t_list **l, t_list *i)
 		*l = i;
 		return ;
 	}
-
-
 	it = *l;
 	while (it)
 	{
 		if (!it->next)
 		{
 			it->next = i;
-			return;
+			return ;
 		}
 		it = it->next;
 	}
@@ -80,4 +74,3 @@ void	list_free(t_list **l)
 	}
 	*l = 0;
 }
-
