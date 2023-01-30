@@ -1,4 +1,7 @@
 #include "common.h"
+#if LOG == 1
+# include "stdio.h"
+#endif
 
 int	max(int a, int b)
 {
@@ -29,7 +32,7 @@ int		db(t_stack *a, t_stack *b, t_list **l)
 	return (0);
 }
 
-#include <stdio.h>
+
 int		dd(t_stack *a, t_stack *b, t_list **l)
 {
 	int	i;
@@ -59,5 +62,3 @@ int		dd(t_stack *a, t_stack *b, t_list **l)
 #endif
 	return (0);
 }
-
-

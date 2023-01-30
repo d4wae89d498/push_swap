@@ -23,4 +23,3 @@ int	rr(t_stack *a, t_stack *b, t_list **l)
 	rb(a, b, 0);
 	return (1);
 }
-
