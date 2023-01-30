@@ -1,12 +1,24 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_index.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:16:45 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:17:08 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "solver.h"
 
-void set_index(t_stack *s, int *median)
+void	set_index(t_stack *s, int *median)
 {
-	static int mem_data_sc[ARG_MAX];
-	t_stack sc;
-	static int passed[ARG_MAX];
-	int i;
-	int j;
+	static int	mem_data_sc[ARG_MAX];
+	t_stack		sc;
+	static int	passed[ARG_MAX];
+	int			i;
+	int			j;
 
 	sc = stack_init(mem_data_sc);
 	stack_clone(&sc, s);

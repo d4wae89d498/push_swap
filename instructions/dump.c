@@ -1,15 +1,35 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   dump.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:11:03 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:16:30 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "common.h"
-#if LOG == 1
-# include "stdio.h"
-#endif
 
 int	max(int a, int b)
 {
 	if (a > b)
-		return a;
-	return b;
+		return (a);
+	return (b);
 }
 
+int	dd(t_stack *a, t_stack *b, t_list **l)
+{
+	(void) a;
+	(void) b;
+	(void) l;
+	return (0);
+}
+/*
+#if LOG == 1
+# include "stdio.h"
+#endif
 int		da(t_stack *a, t_stack *b, t_list **l)
 {	
 	(void) l;
@@ -62,3 +82,4 @@ int		dd(t_stack *a, t_stack *b, t_list **l)
 #endif
 	return (0);
 }
+*/

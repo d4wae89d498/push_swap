@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   list.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:06:26 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:08:33 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "list.h"
 #include "unistd.h"
 
@@ -27,7 +39,7 @@ void	list_push(t_list **l, void *data)
 	list_attach(l, n);
 }
 
-void	list_iter(t_list **l, void(*cb)(void*))
+void	list_iter(t_list **l, t_list_iter_cb cb)
 {
 	t_list	*it;
 

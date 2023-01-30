@@ -1,20 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   stack_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:09:04 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:09:05 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "solver.h"
-
-/*
-#include <stdio.h>
-void	stack_dump(t_stack s)
-{
-	int	i;
-
-	i = s.size;
-	while (i)
-	{
-		i -= 1;
-		printf("[%i] %i\n", i, s.data[i]);
-	}
-	printf("-\n");
-}
-*/
 
 t_stack	stack_init(void *data)
 {

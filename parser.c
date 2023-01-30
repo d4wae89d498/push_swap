@@ -1,8 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:09:39 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:10:58 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "common.h"
 #include "limits.h"
 #include "unistd.h"
 
-static int	ft_parse_error()
+static int	ft_parse_error(void)
 {
 	write(2, "Error\n", 6);
 	exit(0);

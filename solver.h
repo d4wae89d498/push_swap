@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   solver.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 18:56:52 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:05:53 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef SOLVER_H
 # define SOLVER_H
 # include "common.h"
@@ -31,8 +43,7 @@ int		is_sorted_desc(t_stack *s);
 int		is_sorted(t_stack *s, int desc);
 int		cmp(t_stack *s, int ix, int iy, int desc);
 /* strategies */
-int		merge_instructions(t_stack *a, t_stack *b, t_list *ia,
-			t_list *ib, t_list **l);
+t_list	*merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib);
 int		split_swap(t_stack *a, t_stack *b, t_list **l);
 int		radix(t_stack *a, t_stack *b, t_list **l);
 int		bool_tree(t_stack *a, t_stack *b, t_list **l);

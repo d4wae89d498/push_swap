@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cmp.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:17:43 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:17:54 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "solver.h"
 
 int	is_sorted_asc(t_stack *s)
@@ -26,7 +38,7 @@ int	is_sorted(t_stack *s, int desc)
 	return (1);
 }
 
-int 	cmp(t_stack *s, int ix, int iy, int desc)
+int	cmp(t_stack *s, int ix, int iy, int desc)
 {
 	if (desc)
 		return (s->data[ix] > s->data[iy]);

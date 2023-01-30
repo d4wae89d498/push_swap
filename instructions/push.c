@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:14:20 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:14:37 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "common.h"
 
-int		pa(t_stack *a, t_stack *b, t_list **i)
+int	pa(t_stack *a, t_stack *b, t_list **i)
 {
 	list_push(i, "pa");
 	if (!b->size)
@@ -10,7 +22,7 @@ int		pa(t_stack *a, t_stack *b, t_list **i)
 	return (1);
 }
 
-int		pb(t_stack *a, t_stack *b, t_list **i)
+int	pb(t_stack *a, t_stack *b, t_list **i)
 {
 	list_push(i, "pb");
 	if (!a->size)

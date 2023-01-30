@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   insertion_sort.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:17:18 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:17:32 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "solver.h"
 
 static int	insertion_sort_rotation(t_stack *s, t_list **l,
@@ -47,7 +59,7 @@ int	insertion_sort(t_stack *s, t_list **l,
 			k += 1;
 		}
 		k += 1;
-		i += insertion_sort_rotation(s, l, si, &k); 
+		i += insertion_sort_rotation(s, l, si, &k);
 		j += 1;
 	}
 	i += si.r(s, s, l);

@@ -1,10 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split_swap.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: mafaussu <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/30 19:04:14 by mafaussu          #+#    #+#             */
+/*   Updated: 2023/01/30 19:04:28 by mafaussu         ###   ########lyon.fr   */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "solver.h"
-
-//todo :: impl me
-
-#include <string.h>
-
-
 
 int split_swap_begin(t_stack *a, t_stack *b, t_list **l)
 {
@@ -61,18 +67,19 @@ void split_swap_end(t_stack *a, t_stack *b, t_list **ia, t_list **ib)
 
 int	split_swap(t_stack *a, t_stack *b, t_list **l)
 {
-	int		i;
+	t_list	*nl;
 	t_list	*ia;
 	t_list	*ib;
 
 	if (is_sorted(a, 0))
 		return (0);	
-	i = split_swap_begin(a, b, l);
+	split_swap_begin(a, b, l);
 	ia = 0;
 	ib = 0;
 	split_swap_end(a, b, &ia, &ib);
-	i += merge_instructions(a, b, ia, ib, l);
+	nl = merge_instructions(a, b, ia, ib);
+	list_attach(l, nl);
 	while (b->size)
-		i += pa(a, b, l);
-	return (i);
+		pa(a, b, l);
+	return (0);
 }
