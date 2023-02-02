@@ -3,7 +3,7 @@
 
 int	try_s(t_stack *s, t_list **l, int depth)
 {
-	int		mem_sc[ARG_MAX];
+	static int		mem_sc[ARG_MAX];
 	t_stack	sc;
 	int		i;
 
@@ -21,7 +21,7 @@ int	try_s(t_stack *s, t_list **l, int depth)
 
 int	try_r(t_stack *s, t_list **l, int depth)
 {
-	int		mem_sc[ARG_MAX];
+	static int		mem_sc[ARG_MAX];
 	t_stack	sc;
 	int		i;
 
@@ -38,7 +38,7 @@ int	try_r(t_stack *s, t_list **l, int depth)
 
 int	try_rr(t_stack *s, t_list **l, int depth)
 {
-	int		mem_sc[ARG_MAX];
+	static int		mem_sc[ARG_MAX];
 	t_stack	sc;
 	int		i;
 
