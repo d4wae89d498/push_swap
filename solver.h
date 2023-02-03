@@ -29,6 +29,15 @@ typedef struct s_possible_instructions
 	int	r:	1;
 	int	rr:	1;
 }	t_possible_instructions;
+typedef int(*try_cb)(t_stack *s, t_list **l, int depth);
+typedef struct s_branch
+{
+	try_cb try;
+	t_stack *s;
+	t_list **l;
+	int depth;
+	int *ic;
+}	t_branch;
 /* abstrations */
 int		find_index(t_stack s, int n);
 int		find_index_rev(t_stack s, int n);
@@ -49,11 +58,10 @@ int		radix(t_stack *a, t_stack *b, t_list **l);
 int		bool_tree(t_stack *a, t_stack *b, t_list **l);
 int		quick_sort(t_stack *a, t_stack *b, t_list **l);
 void	set_index(t_stack *s, int *median);
-int		try_s(t_stack *s, t_list **l, int depth);
-int		try_r(t_stack *s, t_list **l, int depth);
-int		try_rr(t_stack *s, t_list **l, int depth);
 char	bool_tree_get_c(t_stack *s, t_list **l,
 			t_possible_instructions pi, int depth);
+char	bool_tree_c(t_stack *s, t_list **l, t_possible_instructions pi,
+			int depth);
 int		bool_tree_r(t_stack *s, t_list **l,
 			t_possible_instructions pi, int depth);
 #endif

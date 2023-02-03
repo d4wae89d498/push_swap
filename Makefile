@@ -1,4 +1,4 @@
-CFLAGS=-Wall -Werror -Wextra -I. -DLOG=0#  -g
+CFLAGS=-Wall -Werror -Wextra -I. -DLOG=0  -g
 DEPS=Makefile\
 	list.h\
 	common.h\
@@ -19,7 +19,6 @@ SOLVER_SRCS=\
 	strategies/split_swap_utils.c\
 	strategies/radix.c\
 	strategies/bool_tree.c\
-	strategies/bool_tree_output.c\
 	strategies/bool_tree_utils.c\
 	\
 	abstractions/cmp.c\
@@ -41,4 +40,7 @@ clean:
 	rm -rf $(COMMON_OBJS) $(SOLVER_OBJS) $(CHECKER_OBJS)
 fclean:	clean
 	rm -f $(SOLVER)
+norm:
+	python3 -m norminette
 re:	fclean all
+.PHONY: re fclean clean all test norm
