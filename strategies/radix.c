@@ -17,7 +17,7 @@ static int	get_max(t_stack *s)
 	return (max);
 }
 
-static int radix_util(t_stack *a, t_stack *b, t_list **l, int bits)
+static int	radix_util(t_stack *a, t_stack *b, t_list **l, int bits)
 {
 	int	j;
 	int	k;
@@ -45,10 +45,10 @@ static int radix_util(t_stack *a, t_stack *b, t_list **l, int bits)
 	return (i);
 }
 
-int radix(t_stack *a, t_stack *b, t_list **l)
+int	radix(t_stack *a, t_stack *b, t_list **l)
 {
-	int bits;
-	int n;
+	int	bits;
+	int	n;
 
 	set_index(a, 0);
 	bits = 0;

@@ -17,7 +17,7 @@ int	bool_tree_r(t_stack *s, t_list **l, t_possible_instructions pi, int depth)
 {
 	int	c;
 
-	if (depth > 11)
+	if (depth > 10)
 		return (0);
 	if (is_sorted_asc(s))
 		return (0);

@@ -29,14 +29,14 @@ typedef struct s_possible_instructions
 	int	r:	1;
 	int	rr:	1;
 }	t_possible_instructions;
-typedef int(*try_cb)(t_stack *s, t_list **l, int depth);
+typedef int	(*t_try_cb)(t_stack *s, t_list **l, int depth);
 typedef struct s_branch
 {
-	try_cb try;
-	t_stack *s;
-	t_list **l;
-	int depth;
-	int *ic;
+	t_try_cb	try;
+	t_stack		*s;
+	t_list		**l;
+	int			depth;
+	int			*ic;
 }	t_branch;
 /* abstrations */
 int		find_index(t_stack s, int n);
@@ -52,7 +52,7 @@ int		is_sorted_desc(t_stack *s);
 int		is_sorted(t_stack *s, int desc);
 int		cmp(t_stack *s, int ix, int iy, int desc);
 /* strategies */
-t_list	*merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib);
+int		merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib, t_list **l);
 int		split_swap(t_stack *a, t_stack *b, t_list **l);
 int		radix(t_stack *a, t_stack *b, t_list **l);
 int		bool_tree(t_stack *a, t_stack *b, t_list **l);
