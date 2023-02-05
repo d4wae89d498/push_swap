@@ -30,7 +30,7 @@ SOLVER_SRCS=\
 COMMON_OBJS=$(COMMON_SRCS:.c=.o)
 SOLVER_OBJS=$(SOLVER_SRCS:.c=.o)
 SOLVER=push_swap
-all: $(SOLVER) $(CHECKER)
+all: $(SOLVER)
 %.o: %.c $(DEPS)
 	cc $(CFLAGS) -c $< -o $@
 $(SOLVER): $(COMMON_OBJS) $(SOLVER_OBJS)
@@ -38,7 +38,7 @@ $(SOLVER): $(COMMON_OBJS) $(SOLVER_OBJS)
 test:
 	./Arktest_Push_Swap/arktest.sh
 clean:
-	rm -rf $(COMMON_OBJS) $(SOLVER_OBJS) $(CHECKER_OBJS)
+	rm -rf $(COMMON_OBJS) $(SOLVER_OBJS)
 fclean:	clean
 	rm -f $(SOLVER)
 norm:
