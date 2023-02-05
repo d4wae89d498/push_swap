@@ -12,6 +12,7 @@
 
 #include "solver.h"
 #include "limits.h"
+#include "unistd.h"
 
 int	bool_tree_r(t_stack *s, t_list **l, t_possible_instructions pi, int depth)
 {
@@ -22,6 +23,8 @@ int	bool_tree_r(t_stack *s, t_list **l, t_possible_instructions pi, int depth)
 	if (is_sorted_asc(s))
 		return (0);
 	c = bool_tree_c(s, l, pi, depth);
+	if (c == -1)
+		return (-1);
 	if (c == 's')
 		return (sa(s, 0, l) + bool_tree_r(s, l,
 				(t_possible_instructions){.s = 0, .r = 1, .rr = 1}, depth + 1));

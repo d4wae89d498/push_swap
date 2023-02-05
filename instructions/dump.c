@@ -19,14 +19,6 @@ int	max(int a, int b)
 	return (b);
 }
 
-int	dd(t_stack *a, t_stack *b, t_list **l)
-{
-	(void) a;
-	(void) b;
-	(void) l;
-	return (0);
-}
-/*
 #if LOG == 1
 # include "stdio.h"
 #endif
@@ -36,7 +28,7 @@ int		da(t_stack *a, t_stack *b, t_list **l)
 	(void) b;
 	(void) a;
 #if LOG == 1
-	stack_dump(*a);
+	dd(a, 0, 0);
 #endif
 	return (0);
 }
@@ -47,7 +39,7 @@ int		db(t_stack *a, t_stack *b, t_list **l)
 	(void) b;
 	(void) a;
 #if LOG == 1
-	stack_dump(*b);
+	dd(0, b, l);
 #endif
 	return (0);
 }
@@ -82,4 +74,3 @@ int		dd(t_stack *a, t_stack *b, t_list **l)
 #endif
 	return (0);
 }
-*/

@@ -18,25 +18,27 @@ t_list	*list_new(void *data)
 	t_list	*l;
 
 	l = malloc(sizeof(t_list));
+	if (!l)
+		return (0);
 	l->data = data;
 	l->next = 0;
 	return (l);
 }
 
-void	list_push(t_list **l, void *data)
+int	list_push(t_list **l, void *data)
 {
 	t_list	*n;
 
 	if (!l)
-		return ;
+		return (0);
 	n = list_new(data);
 	if (!n)
 	{
 		list_free(l);
-		write(2, "Error\n", 6);
-		exit(0);
+		return (1);
 	}
 	list_attach(l, n);
+	return (0);
 }
 
 void	list_iter(t_list **l, t_list_iter_cb cb)

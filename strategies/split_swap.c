@@ -23,7 +23,7 @@ int	eval_b(t_stack *a, t_stack *b, t_list **l, char *str)
 {
 	int i = 0;
 
-	if (!strcmp(str, "pn"))
+	if (!strcmp(str, "pb"))
 		i += pb(a, b, l);
 	else if (!strcmp(str, "sb"))
 		i += sb(a, b, l);
@@ -34,58 +34,79 @@ int	eval_b(t_stack *a, t_stack *b, t_list **l, char *str)
 	return (i);
 }
 
+void	next(t_list **it_a, t_list **it_b)
+{
+		if (*it_a)
+			*it_a = (*it_a)->next;
+		if (*it_b)
+			*it_b = (*it_b)->next;
+}
+
+int	try_simple(t_stack *a, t_stack *b, t_list **it_a, t_list **it_b, t_list **l)
+{
+	if (!strcmp((*it_a)->data, "sa") && !strcmp((*it_b)->data, "sb"))
+		ss(a, b, l);
+	else if (!strcmp((*it_a)->data, "ra") && !strcmp((*it_b)->data, "rb"))
+		rr(a, b, l);
+	else if (!strcmp((*it_a)->data, "rra") && !strcmp((*it_b)->data, "rrb"))
+		rrr(a, b, l);
+	else
+		return (0);
+	return (1);
+}
+
+int try_next_a()
+{
+	return (0);
+}
+
+int try_next_b(t_stack *a, t_stack *b, t_list **it_a, t_list **it_b, t_list **l)
+{
+	int i;
+
+	i = 0;
+	if (!strcmp((*it_a)->data, "sa") && !strcmp((*it_b)->next->data, "sb"))
+	{
+		i += eval_b(a, b, l, (*it_b)->data);
+		i += ss(a, b, l);
+		(*it_b) = (*it_b)->next;
+	}
+	else if (!strcmp((*it_a)->data, "ra") && !strcmp((*it_b)->next->data, "rb"))
+	{
+		i += eval_b(a, b, l, (*it_b)->data);
+		i += rr(a, b, l);
+		(*it_b) = (*it_b)->next;
+	}
+	else if (!strcmp((*it_a)->data, "rra") && !strcmp((*it_b)->next->data, "rrb"))
+	{
+		i += eval_b(a, b, l, (*it_b)->data);
+		i += rrr(a, b, l);
+		(*it_b) = (*it_b)->next;
+	}
+	return (i);
+}
+
 int	merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib, t_list **l)
 {
-	int	i = 0;
-
+	int		i;
+	int		s;
 	t_list	*it_a;
 	t_list	*it_b;
 
+	i = 0;
+	s = 0;
 	it_a = ia;
 	it_b = ib;
 	while (it_a || it_b)
 	{
+		s = 0;
 		if (it_a && it_b)
 		{
-			if (!strcmp(it_a->data, "sa") && !strcmp(it_b->data, "sb"))
-			{
-				i += ss(a, b, l);
-				goto next;
-			}
-			else if (!strcmp(it_a->data, "ra") && !strcmp(it_b->data, "rb"))
-			{
-				i += rr(a, b, l);
-				goto next;
-			}
-			else if (!strcmp(it_a->data, "rra") && !strcmp(it_b->data, "rrb"))
-			{
-				i += rrr(a, b, l);
-				goto next;
-			}
-			else if (it_b->next)
-			{
-				if (!strcmp(it_a->data, "sa") && !strcmp(it_b->next->data, "sb"))
-				{
-					i += eval_b(a, b, l, it_b->data);
-					i += ss(a, b, l);
-					it_b = it_b->next;
-					goto next;
-				}
-				else if (!strcmp(it_a->data, "ra") && !strcmp(it_b->next->data, "rb"))
-				{
-					i += eval_b(a, b, l, it_b->data);
-					i += rr(a, b, l);
-					it_b = it_b->next;
-					goto next;
-				}
-				else if (!strcmp(it_a->data, "rra") && !strcmp(it_b->next->data, "rrb"))
-				{
-					i += eval_b(a, b, l, it_b->data);
-					i += rrr(a, b, l);
-					it_b = it_b->next;
-					goto next;
-				}
-			}
+			s = 1;
+			if (try_simple(a, b, &it_a, &it_b, l))
+				;
+			else if (it_b->next && try_next_b(a, b, &it_a, &it_b, l))
+				;
 			else if (it_a->next)
 			{
 				if (!strcmp(it_a->next->data, "sa") && !strcmp(it_b->data, "sb"))
@@ -93,160 +114,107 @@ int	merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib, t_list **
 					i += eval_a(a, b, l, it_a->data);
 					i += ss(a, b, l);
 					it_a = it_a->next;
-					goto next;
 				}
 				else if (!strcmp(it_a->next->data, "ra") && !strcmp(it_b->data, "rb"))
 				{
 					i += eval_a(a, b, l, it_a->data);
 					i += rr(a, b, l);
 					it_a = it_a->next;
-					goto next;
 				}
 				else if (!strcmp(it_a->next->data, "rra") && !strcmp(it_b->data, "rrb"))
 				{
 					i += eval_a(a, b, l, it_a->data);
 					i += rrr(a, b, l);
 					it_a = it_a->next;
-					goto next;
 				}
-			} 
+				else
+					s = 0;
+			}
+			else
+				s = 0;
 		}
-		if (it_a)
+		if (!s)
 		{
-			i += eval_a(a, b, l, it_a->data);
+			if (it_a)
+				i += eval_a(a, b, l, it_a->data);
+			if (it_b)
+				i += eval_b(a, b, l, it_b->data);
 		}
-
-		if (it_b)
-		{
-			i += eval_b(a, b, l, it_b->data);
-		}
-next:
-		if (it_a)
-			it_a = it_a->next;
-		if (it_b)
-			it_b = it_b->next;
+		next(&it_a, &it_b);
 	}
 	return (i);
 }
 
-int	split_swap(t_stack *a, t_stack *b, t_list **l)
+static int	split_swap_init(t_stack *a, t_stack *b, t_list **l)
 {
-	int		index;
-	int	c;
-	int	i;
-	static int	mem_bc[ARG_MAX];
-	t_stack		bc;
+
+	int			c;
 	static int	mem_ac[ARG_MAX];
 	t_stack		ac;
-
-
-	
-
-	bc = stack_init(mem_bc);
-	ac = stack_init(mem_ac);
-	i = 0;
-	
-//	i += insertion_sort(a, l, 
-//			(t_stack_instructions) {
-//			.r=ra, 
-//			.rr=rra, 
-//			.p=pa, 
-//			.s=sa
-//		}, 0);
-	//sort_five(a, b, a, l, (t_stack_instructions) {.r=ra, .rr=rra, .s=sa, .p=pa});
-//	dd(a, b, 0);
-//	exit(0);
-	if (is_sorted(a, 0))
-		return (i);	
+	int			p;
+	int			t;
 
 	c = 0;
+	ac = stack_init(mem_ac);
 	stack_clone(&ac, a);
 	stack_order_asc(&ac);
-	int p = ac.data[ac.size / 2];
-	int	t = ac.size;
+	p = ac.data[ac.size / 2];
+	t  = ac.size;
 	while (c < t)
 	{
 		if (a->data[a->size - 1] < p)
-			i += pb(a, b, l);
+			pb(a, b, l);
 		else
-			i += ra(a, b, l);
+			ra(a, b, l);
 		c += 1;
 	}
-/*	c = 0;
-	while (c < a->size/2)
-	{
-		i += rra(a, b, l);
-		c += 1;
-	}
-*/
+	return (0);
+}
 
+static int	split_swap_end(t_stack *a, t_stack *b, t_list **l)
+{
+	int		mem_ac[ARG_MAX];
+	t_stack	ac;
+	int		mem_bc[ARG_MAX];
+	t_stack	bc;
+	t_list	*ia;
+	t_list	*ib;
+	int		i;
 
+	ac = stack_init(mem_ac);
 	stack_clone(&ac, a);
-	stack_order_asc(&ac);
+	bc = stack_init(mem_bc);
 	stack_clone(&bc, b);
-	stack_order_desc(&bc);
-
-	(void) index;
-
-
-
-	static int	mem_acc[ARG_MAX];
-	t_stack		acc;
-	static int	mem_bcc[ARG_MAX];
-	t_stack		bcc;
-	acc = stack_init(mem_acc);
-	bcc = stack_init(mem_bcc);
-	stack_clone(&acc, a);
-	stack_clone(&bcc, b);
-	t_list	*ia = 0;
-	t_list	*ib = 0;
-
-/*
-		order_a(&acc, &bcc, &ac, &ia);
-
-		order_b(&acc, &bcc, &bc, &ib);
-
-*/
-
-
-
-	
-//	bubble_sort_a(&acc, &bcc, &ia);
-//	bubble_sort_b(&acc, &bcc, &ib);
-
-	insertion_sort(&acc, &ia, 
+	i = 0;
+	ia = 0;
+	ib = 0;
+	insertion_sort(&ac, &ia, 
 			(t_stack_instructions) {
 			.r=ra, 
 			.rr=rra, 
 			.p=pa, 
 			.s=sa
 		}, 0);
-	
-
-	insertion_sort(&bcc, &ib, 
+	insertion_sort(&bc, &ib, 
 			(t_stack_instructions) {
 			.r=rb, 
 			.rr=rrb, 
 			.p=pb, 
 			.s=sb
 		}, 1);
-
 	i += merge_instructions(a, b, ia, ib, l);
-
-//	dd(a, b, 0);
-
-//		exit(0);
-
 	while (b->size)
-	{
 		i += pa(a, b, l);
-/*
-		index = find_index_rev(*a, b->data[b->size - 1]);
-
-		if (index < a->size / 2)
-			i += pa_at(a, b, l, index);
-		else
-			i += pa_at_rev(a, b, l, index);*/
-	}
 	return (i);
+}
+
+int	split_swap(t_stack *a, t_stack *b, t_list **l)
+{
+	int			i;
+
+	if (is_sorted(a, 0))
+		return (0);	
+	i = 0;
+	i += split_swap_init(a, b, l);
+	return (i + split_swap_end(a, b, l));
 }

@@ -36,7 +36,10 @@ static void	solve(t_stack *a, t_stack *b)
 		split_swap(a, b, &instructions);
 	else
 		radix(a, b, &instructions);
-	list_iter(&instructions, (void *) putstr);
+	if (!is_sorted_asc(a))
+		write(2, "Error\n", 6);
+	else
+		list_iter(&instructions, (void *) putstr);
 	list_free(&instructions);
 	dd(a, b, 0);
 }

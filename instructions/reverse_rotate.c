@@ -15,7 +15,8 @@
 int	rra(t_stack *a, t_stack *b, t_list **l)
 {
 	(void)b;
-	list_push(l, "rra");
+	if (list_push(l, "rra"))
+		return (0);
 	stack_reverse_rotate(*a);
 	return (1);
 }
@@ -23,14 +24,16 @@ int	rra(t_stack *a, t_stack *b, t_list **l)
 int	rrb(t_stack *a, t_stack *b, t_list **l)
 {
 	(void)a;
-	list_push(l, "rrb");
+	if (list_push(l, "rrb"))
+		return (0);
 	stack_reverse_rotate(*b);
 	return (1);
 }
 
 int	rrr(t_stack *a, t_stack *b, t_list **l)
 {
-	list_push(l, "rrr");
+	if (list_push(l, "rrr"))
+		return (0);
 	rra(a, b, 0);
 	rrb(a, b, 0);
 	return (1);

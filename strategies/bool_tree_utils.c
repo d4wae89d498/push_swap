@@ -21,6 +21,8 @@ static inline int	try_s(t_stack *s, t_list **l, int depth)
 
 	(void) l;
 	mem_sc = malloc(s->size * sizeof(int));
+	if (!mem_sc)
+		return (0);
 	sc = stack_init(mem_sc);
 	stack_clone(&sc, s);
 	i = 0;
@@ -44,6 +46,8 @@ static inline int	try_r(t_stack *s, t_list **l, int depth)
 
 	(void) l;
 	mem_sc = malloc(s->size * sizeof(int));
+	if (!mem_sc)
+		return (0);
 	sc = stack_init(mem_sc);
 	stack_clone(&sc, s);
 	i = (ra(&sc, 0, 0));
@@ -66,6 +70,8 @@ static inline int	try_rr(t_stack *s, t_list **l, int depth)
 
 	(void) l;
 	mem_sc = malloc(s->size * sizeof(int));
+	if (!mem_sc)
+		return (0);
 	sc = stack_init(mem_sc);
 	stack_clone(&sc, s);
 	i = (rra(&sc, 0, 0));
