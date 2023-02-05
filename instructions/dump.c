@@ -19,6 +19,15 @@ int	max(int a, int b)
 	return (b);
 }
 
+int	dd(t_stack *a, t_stack *b, t_list **l)
+{
+	(void) l;
+	(void) b;
+	(void) a;
+	return (0);
+}
+
+/*
 #if LOG == 1
 # include "stdio.h"
 #endif
@@ -73,4 +82,4 @@ int		dd(t_stack *a, t_stack *b, t_list **l)
 	printf("   \ta\tb\n-----------------------------------\n");
 #endif
 	return (0);
-}
+}*/

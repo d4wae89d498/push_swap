@@ -15,7 +15,7 @@
 int	ra(t_stack *a, t_stack *b, t_list **l)
 {
 	(void)b;
-	if(list_push(l, "ra"))
+	if (list_push(l, "ra"))
 		return (0);
 	stack_rotate(*a);
 	return (1);

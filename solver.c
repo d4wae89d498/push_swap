@@ -13,6 +13,16 @@
 #include "solver.h"
 #include "unistd.h"
 
+int	ft_strcmp(const char *a, const char *b)
+{
+	while (*a && *a == *b)
+	{
+		a += 1;
+		b += 1;
+	}
+	return (*a - *b);
+}
+
 static void	putstr(char *str)
 {
 	int	i;

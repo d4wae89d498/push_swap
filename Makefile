@@ -15,6 +15,8 @@ COMMON_SRCS=instructions/rotate.c\
 	parser.c
 CHECKER_SRCS=checker.c
 SOLVER_SRCS=\
+	solver.c\
+	\
 	strategies/split_swap.c\
 	strategies/split_swap_utils.c\
 	strategies/radix.c\
@@ -24,16 +26,15 @@ SOLVER_SRCS=\
 	abstractions/cmp.c\
 	abstractions/insertion_sort.c\
 	abstractions/set_index.c\
-	\
-	solver.c
+
 COMMON_OBJS=$(COMMON_SRCS:.c=.o)
 SOLVER_OBJS=$(SOLVER_SRCS:.c=.o)
 SOLVER=push_swap
 all: $(SOLVER) $(CHECKER)
 %.o: %.c $(DEPS)
 	cc $(CFLAGS) -c $< -o $@
-$(SOLVER): $(COMMON_OBJS) $(SOLVER_SRCS)
-	cc $(CFLAGS) $(COMMON_OBJS) $(SOLVER_SRCS) -o $@
+$(SOLVER): $(COMMON_OBJS) $(SOLVER_OBJS)
+	cc $(CFLAGS) $(COMMON_OBJS) $(SOLVER_OBJS) -o $@
 test:
 	./Arktest_Push_Swap/arktest.sh
 clean:

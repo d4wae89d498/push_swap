@@ -13,7 +13,6 @@
 #ifndef SOLVER_H
 # define SOLVER_H
 # include "common.h"
-# include "stdio.h"
 # include "stdlib.h"
 
 typedef struct s_stack_instructions
@@ -38,6 +37,23 @@ typedef struct s_branch
 	int			depth;
 	int			*ic;
 }	t_branch;
+typedef struct mem
+{
+	t_list	*ia;
+	t_list	*ib;
+	t_stack	ac;
+	int		mem_ac[ARG_MAX];
+	t_stack	bc;
+	int		mem_bc[ARG_MAX];
+}	t_m;
+typedef struct s_s2l3
+{
+	t_stack	*a;
+	t_stack	*b;
+	t_list	**ia;
+	t_list	**ib;
+	t_list	**l;
+}	t_s2l3;
 /* abstrations */
 int		find_index(t_stack s, int n);
 int		find_index_rev(t_stack s, int n);
@@ -52,7 +68,7 @@ int		is_sorted_desc(t_stack *s);
 int		is_sorted(t_stack *s, int desc);
 int		cmp(t_stack *s, int ix, int iy, int desc);
 /* strategies */
-int		merge_instructions(t_stack *a, t_stack *b, t_list *ia, t_list *ib, t_list **l);
+int		merge_instructions(t_s2l3 args);
 int		split_swap(t_stack *a, t_stack *b, t_list **l);
 int		radix(t_stack *a, t_stack *b, t_list **l);
 int		bool_tree(t_stack *a, t_stack *b, t_list **l);
@@ -64,4 +80,8 @@ char	bool_tree_c(t_stack *s, t_list **l, t_possible_instructions pi,
 			int depth);
 int		bool_tree_r(t_stack *s, t_list **l,
 			t_possible_instructions pi, int depth);
+int		eval_a(t_stack *a, t_stack *b, t_list **l, char *str);
+int		eval_b(t_stack *a, t_stack *b, t_list **l, char *str);
+void	next(t_list **it_a, t_list **it_b);
+int		ft_strcmp(const char *a, const char *b);
 #endif
